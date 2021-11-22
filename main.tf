@@ -119,4 +119,5 @@ output "controller-ip" {
 
 output "windowsadminpass" {
   value = random_password.adminpass.result
+  sensitive = true
 }
