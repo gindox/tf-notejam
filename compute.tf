@@ -138,7 +138,7 @@ resource "azurerm_virtual_machine_extension" "compute02conf" {
 
   protected_settings = <<PROTECTED_SETTINGS
     {
-      "commandToExecute": "powershell.exe -Command \"./compute.ps1 -instrumentationkey \"${azurerm_application_insights.apm.instrumentation_key}\" -adminpass \"${random_password.adminpass.result}\"; exit 0;\""
+      "commandToExecute": "powershell.exe -Command \"./compute.ps1 -instrumentationkey \"${azurerm_application_insights.apm.instrumentation_key}\" -adminpass \"${random_password.adminpass.result}\" -domainName \"${var.domainname}\" -netBIOSName \"${var.netbiosname}\"; exit 0;\""
     }
   PROTECTED_SETTINGS
 
