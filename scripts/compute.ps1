@@ -6,7 +6,15 @@ param(
 
     [Parameter(Mandatory = $True)]
     [string]
-    $instrumentationkey
+    $instrumentationkey,
+
+    [Parameter(Mandatory = $True)]
+    [String]
+    $domainName,
+
+    [parameter(Mandatory = $True)]
+    [String]
+    $netBIOSName
 )
 
 
@@ -26,9 +34,9 @@ Register-ScheduledTask -TaskName "dockerquickrun" -InputObject $definition
 
 
 
-$un = "notejam\localadmin"
+$un = $netBIOSName + "\localadmin"
 $pass = ConvertTo-SecureString -String $adminpass -AsPlainText -Force
 $cred = New-Object -TypeName "System.Management.Automation.PSCredential" -ArgumentList $un, $pass
 
-Add-Computer -DomainName "notejam.local" -Credential $cred -Restart -Force
+Add-Computer -DomainName $domainName -Credential $cred -Restart -Force
 

@@ -111,14 +111,14 @@ resource "azurerm_virtual_machine_extension" "compute01conf" {
 
   protected_settings = <<PROTECTED_SETTINGS
     {
-      "commandToExecute": "powershell.exe -Command \"./bootstrap.ps1 -instrumentationkey \"${azurerm_application_insights.apm.instrumentation_key}\" -adminpass \"${random_password.adminpass.result}\"; exit 0;\""
+      "commandToExecute": "powershell.exe -Command \"./compute.ps1 -instrumentationkey \"${azurerm_application_insights.apm.instrumentation_key}\" -adminpass \"${random_password.adminpass.result}\" -domainName \"${var.domainname}\" -netBIOSName \"${var.netbiosname}\"; exit 0;\""
     }
   PROTECTED_SETTINGS
 
   settings = <<SETTINGS
     {
         "fileUris": [
-          "https://gist.githubusercontent.com/gindox/2848326de9431183339cd09361497ed1/raw/c5cc4db6802e69a0be4bab94f7c3373727901a29/bootstrap.ps1"
+          "https://raw.githubusercontent.com/gindox/tf-notejam/master/scripts/compute.ps1"
         ]
     }
   SETTINGS
@@ -138,14 +138,14 @@ resource "azurerm_virtual_machine_extension" "compute02conf" {
 
   protected_settings = <<PROTECTED_SETTINGS
     {
-      "commandToExecute": "powershell.exe -Command \"./bootstrap.ps1 -instrumentationkey \"${azurerm_application_insights.apm.instrumentation_key}\" -adminpass \"${random_password.adminpass.result}\"; exit 0;\""
+      "commandToExecute": "powershell.exe -Command \"./compute.ps1 -instrumentationkey \"${azurerm_application_insights.apm.instrumentation_key}\" -adminpass \"${random_password.adminpass.result}\"; exit 0;\""
     }
   PROTECTED_SETTINGS
 
   settings = <<SETTINGS
     {
         "fileUris": [
-          "https://gist.githubusercontent.com/gindox/2848326de9431183339cd09361497ed1/raw/c5cc4db6802e69a0be4bab94f7c3373727901a29/bootstrap.ps1"
+          "https://raw.githubusercontent.com/gindox/tf-notejam/master/scripts/compute.ps1"
         ]
     }
   SETTINGS

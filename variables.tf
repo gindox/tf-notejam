@@ -20,6 +20,14 @@ variable "windowsadminuser" {
   default = "localadmin"
 }
 
+variable "domainname" {
+  default = "notejam.local"
+}
+
+variable "netbiosname" {
+  default = "notejam"
+}
+
 variable "hubvnet" {
   default = "vnet-northeu-notejam-prod"
 }

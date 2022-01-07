@@ -97,14 +97,14 @@ resource "azurerm_virtual_machine_extension" "controllerconfig" {
 
   protected_settings = <<PROTECTED_SETTINGS
     {
-      "commandToExecute": "powershell.exe -Command \"./install1.ps1 -adminpass \"${random_password.adminpass.result}\"; exit 0;\""
+      "commandToExecute": "powershell.exe -Command \"./controller.ps1 -adminpass \"${random_password.adminpass.result}\" -domainName \"${var.domainname}\" -netBIOSName \"${var.netbiosname}\"; exit 0;\""
     }
   PROTECTED_SETTINGS
 
   settings = <<SETTINGS
     {
         "fileUris": [
-          "https://gist.githubusercontent.com/gindox/defaf791947dea041a4fb461776e9ed7/raw/51f8d6213fb31f59e52aa1f22f0c67530f4f7b0d/install1.ps1"
+          "https://raw.githubusercontent.com/gindox/tf-notejam/master/scripts/controller.ps1"
         ]
     }
   SETTINGS

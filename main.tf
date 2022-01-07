@@ -10,11 +10,8 @@ terraform {
     }
   }
 
-  backend "azurerm" {
-    key                  = "terraform.tfstate"
-    storage_account_name = "#stname#" #stname
-    container_name       = "tfstate"
-    resource_group_name  = "#rgName#" #rgName
+  backend "local" {
+    path = "terraform.tfstate"
   }
 }
 
