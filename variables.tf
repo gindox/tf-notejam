@@ -43,3 +43,7 @@ locals  {
 locals  {
   keyvaultname = "kv-hubprod-${random_string.suffix.result}"
 }
+
+variable "dockerPackageURL" {
+  default = "ghcr.io/gindox/notejamnano/notejamnano:ltsc2022"
+}

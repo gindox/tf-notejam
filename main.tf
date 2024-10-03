@@ -27,6 +27,10 @@ provider "azurerm" {
 data "azurerm_client_config" "current" {
 }
 
+#https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/data-sources/client_config
+data "azuread_client_config" "current" {
+}
+
 #https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password
 resource "random_password" "adminpass" {
   length  = 24
@@ -62,7 +66,7 @@ resource "azurerm_key_vault" "kv" {
 
   access_policy {
     tenant_id = data.azurerm_client_config.current.tenant_id
-    object_id = data.azurerm_client_config.current.object_id
+    object_id = data.azuread_client_config.current.object_id
 
     secret_permissions = [
       "get",

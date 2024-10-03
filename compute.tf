@@ -26,7 +26,7 @@ resource "azurerm_windows_virtual_machine" "compute01" {
   name                = "compute01"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
-  size                = "Standard_B1ms"
+  size                = "Standard_B2ats_v2"
   availability_set_id = azurerm_availability_set.computeavset.id
   admin_username      = var.windowsadminuser
   admin_password      = random_password.adminpass.result
@@ -42,7 +42,7 @@ resource "azurerm_windows_virtual_machine" "compute01" {
   source_image_reference {
     publisher = "MicrosoftWindowsServer"
     offer     = "WindowsServer"
-    sku       = "datacenter-core-2004-with-containers-smalldisk"
+    sku       = "23h2-datacenter-core-g2"
     version   = "latest"
   }
 }
@@ -66,7 +66,7 @@ resource "azurerm_windows_virtual_machine" "compute02" {
   name                = "compute02"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
-  size                = "Standard_B2ms"
+  size                = "Standard_B2ats_v2"
   availability_set_id = azurerm_availability_set.computeavset.id
   admin_username      = var.windowsadminuser
   admin_password      = random_password.adminpass.result
@@ -82,7 +82,7 @@ resource "azurerm_windows_virtual_machine" "compute02" {
   source_image_reference {
     publisher = "MicrosoftWindowsServer"
     offer     = "WindowsServer"
-    sku       = "datacenter-core-2004-with-containers-smalldisk"
+    sku       = "23h2-datacenter-core-g2"
     version   = "latest"
   }
 }
@@ -138,7 +138,7 @@ resource "azurerm_virtual_machine_extension" "compute02conf" {
 
   protected_settings = <<PROTECTED_SETTINGS
     {
-      "commandToExecute": "powershell.exe -Command \"./compute.ps1 -instrumentationkey \"${azurerm_application_insights.apm.instrumentation_key}\" -adminpass \"${random_password.adminpass.result}\" -domainName \"${var.domainname}\" -netBIOSName \"${var.netbiosname}\"; exit 0;\""
+      "commandToExecute": "powershell.exe -Command \"./compute.ps1 -instrumentationkey \"${azurerm_application_insights.apm.instrumentation_key}\" -adminpass \"${random_password.adminpass.result}\" -domainName \"${var.domainname}\" -dockerPackageURL \"${var.dockerPackageURL}\" -netBIOSName \"${var.netbiosname}\"; exit 0;\""
     }
   PROTECTED_SETTINGS
 

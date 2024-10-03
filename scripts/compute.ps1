@@ -14,12 +14,17 @@ param(
 
     [parameter(Mandatory = $True)]
     [String]
-    $netBIOSName
+    $netBIOSName,
+
+    [parameter(Mandatory = $True)]
+    [String]
+    $dockerPackageURL
+
 )
 
 
-$cmd = 'docker run -d -p 80:3000 -e APPINSIGHTS_KEY=' + $instrumentationkey + ' --restart always gindox/notejamnano:2004
-Unregister-ScheduledTask -TaskName "dockerquickrun"  -ErrorAction SilentlyContinue -Confirm:$false
+$cmd = 'docker run -d -p 80:3000 -e APPINSIGHTS_KEY=' + $instrumentationkey + ' --restart always ' + $dockerPackageURL + ';  
+Unregister-ScheduledTask -TaskName "dockerquickrun"  -ErrorAction SilentlyContinue -Confirm:$false;
 rm -Force C:\Windows\dockerquickrun.ps1
 ' 
 $cmd | Out-File "C:\Windows\dockerquickrun.ps1"
