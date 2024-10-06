@@ -63,7 +63,7 @@ resource "azurerm_windows_virtual_machine" "controller" {
   name                = "controller"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
-  size                = "Standard_D2s_v3"
+  size                = "Standard_B2als_v2"
   admin_username      = var.windowsadminuser
   admin_password      = random_password.adminpass.result
   network_interface_ids = [
@@ -80,7 +80,7 @@ resource "azurerm_windows_virtual_machine" "controller" {
   source_image_reference {
     publisher = "MicrosoftWindowsServer"
     offer     = "WindowsServer"
-    sku       = "2019-Datacenter-Core-smalldisk"
+    sku       = "2022-datacenter-core-smalldisk-g2"
     version   = "latest"
   }
 }

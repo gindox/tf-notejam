@@ -1,4 +1,13 @@
 terraform {
+  cloud { 
+    
+    organization = "gindox" 
+
+    workspaces { 
+      name = "notejam" 
+    } 
+  } 
+
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
@@ -8,10 +17,6 @@ terraform {
       source  = "hashicorp/random"
       version = "=3.1.0"
     }
-  }
-
-  backend "local" {
-    path = "terraform.tfstate"
   }
 }
 

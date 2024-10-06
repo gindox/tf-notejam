@@ -26,7 +26,7 @@ resource "azurerm_windows_virtual_machine" "compute01" {
   name                = "compute01"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
-  size                = "Standard_B2ats_v2"
+  size                = "Standard_B2als_v2"
   availability_set_id = azurerm_availability_set.computeavset.id
   admin_username      = var.windowsadminuser
   admin_password      = random_password.adminpass.result
@@ -66,7 +66,7 @@ resource "azurerm_windows_virtual_machine" "compute02" {
   name                = "compute02"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
-  size                = "Standard_B2ats_v2"
+  size                = "Standard_B2als_v2"
   availability_set_id = azurerm_availability_set.computeavset.id
   admin_username      = var.windowsadminuser
   admin_password      = random_password.adminpass.result
@@ -82,7 +82,7 @@ resource "azurerm_windows_virtual_machine" "compute02" {
   source_image_reference {
     publisher = "MicrosoftWindowsServer"
     offer     = "WindowsServer"
-    sku       = "23h2-datacenter-core-g2"
+    sku       = "2022-datacenter-core-smalldisk-g2"
     version   = "latest"
   }
 }
