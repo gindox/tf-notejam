@@ -22,12 +22,6 @@ param(
 
 )
 
-Install-Module DockerMsftProvider -Force
-
-Invoke-WebRequest -UseBasicParsing "https://raw.githubusercontent.com/microsoft/Windows-Containers/Main/helpful_tools/Install-DockerCE/install-docker-ce.ps1" -o C:\Windows\install-docker-ce.ps1
-
-C:\Windows\install-docker-ce.ps1
-
 $cmd = 'docker run -d -p 80:3000 -e APPINSIGHTS_KEY=' + $instrumentationkey + ' --restart always ' + $dockerPackageURL + ';  
 Unregister-ScheduledTask -TaskName "dockerquickrun"  -ErrorAction SilentlyContinue -Confirm:$false;
 rm -Force C:\Windows\dockerquickrun.ps1
